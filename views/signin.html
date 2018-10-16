@@ -39,24 +39,17 @@
     </div>
     <script src="/node_modules/jquery/dist/jquery.js"></script>
     <script>
-        // 箭头函数是ES6的新语法，在客户端并不是所有浏览器都能兼容，所以不推荐使用
-        $('form').on('submit', function(e) {
-            e.preventDefault(); //组织表单的默认提交事件
+        // 在客户端发送请求
+        $('#signin_form').on('submit', function(e) {
+            e.preventDefault();
             var formdata = $(this).serialize();
             $.post('/signin', formdata, function(data) {
-                // alert(data);
-                // if (data.code == 500) {
-                //     alert(data.message);
-                // }
                 if (data.code == 200) {
                     window.location.href = '/';
                 } else {
-                    alert(data.message);
+                    alert(data.message)
                 }
-
             })
-
-
         })
     </script>
 </body>
