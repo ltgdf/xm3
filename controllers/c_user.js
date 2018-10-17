@@ -26,6 +26,11 @@ exports.handleSignin = (req, res) => {
             })
         }
 
+        // 将登陆的用户信息存入req.session中
+        // 注意 express-session包存储的 数据不是持久化保存
+        // mysql express-mysql-session  把express-session保存的信息自动req.session自动保存在数据库中
+        req.session.user = data[0];
+
         res.send({
                 code: 200,
                 message: '可以跳转了'
@@ -36,6 +41,11 @@ exports.handleSignin = (req, res) => {
     })
 
 
+}
+exports.signinOut = (req, res) => {
+    //清除session中保存的用户信息
+    delete req.session.user
+    res.redirect('/signin')
 }
 
 exports.showSignin = showSignin;
